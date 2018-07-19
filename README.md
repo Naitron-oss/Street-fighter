@@ -1,2 +1,2 @@
 # RPG-street-fighter-game
-A HTML/CSS Browser Game that used JavaScript to compose the logic and used jQuery for DOM manipulation.
+A HTML/CSS Browser Game that uses JavaScript to compose the logic and jQuery for DOM manipulation.
