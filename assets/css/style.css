@@ -12,3 +12,15 @@ body{
     width: 200%;
     
 }
+.ken{
+background-image: url(../images/ken.png);
+}
+.ryu{
+    background-image: url(../images/ryu.png);
+}
+.sakura{
+    background-image: url(../images/sakura.png);
+}
+.chibi{
+    background-image: url(../images/chibi.png);
+}
