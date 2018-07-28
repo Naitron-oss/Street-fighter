@@ -3,10 +3,10 @@ var $sakuraImage = $("#sakura-image");
 var $chibiImage = $("#chibi-image");
 var $ryuImage = $("#ryu-image");
 var $attackBtn = $("#attack-btn");
-var $playerHP
-var $computerHP
-var $playerXP
-var $computerXP
+var $playerHp
+var $computerHp
+var $playerXp
+var $computerXp
 var $playerHpDiv;
 var $playerXpDiv;
 var $computerHpDiv;
@@ -15,7 +15,7 @@ var $computerXpDiv;
 var game = {
         player: "",
         computerPlayer: "",
-        playerHP: 0,
+        playerHp: 0,
         computerHp: 0,
         playerAtk: 0,
         counterAtk: 0,
@@ -49,23 +49,25 @@ var game = {
 
         //select player
         selectPlayer: function (player) {
-            if (this.player === " ") {
+            if (this.player === "") {
                 this.player = player;
                 this.playerHp = this.character[this.player].hp;
                 this.playerAtk = this.character[this.player].atk;
                 var attacker = $("<.attacker>");
                 attacker.addClass(this.character[player]);
-                attacker.attr();
-                atttacker.appendTo(".attacker")
-                for (var opponent in this.characters) {
-                    if (opponent !== this.player) {
-                        this.computerPlayer = opponent;
+                attacker.attr('style="width: 200%"');
+                atttacker.append(".attacker")
+                for (var defender in this.characters) {
+                    if (defender !== this.player) {
+                        this.computerPlayer = defender;
+                        console.log(defender);
                     }
                 }
                 var opponent = $(".defender");
                 opponent.appendTo(this.computerPlayer);
-                this.computerHP = this.character[this.computerPlayer].hp;
+                this.computerHp = this.character[this.computerPlayer].hp;
                 this, counterAtk = this.character[this.computerPlayer].counterAtk;
+                console.log();
             }
             this.startGame();
         },
@@ -73,12 +75,7 @@ var game = {
         //set-up of game
         setUp: function () {
             this.healthSetup();
-            this.xpSetup();
-    
-            $('.playerHP').append($playerHpDiv.append($playerHP));
-            $('.playerXP').append($playerXpDiv.append($playerXP));
-            $('.computerHP').append($computerHpDiv.append($computerHP));
-            $('.computerXP').append($computerXpDiv.append($computerXP));
+         //   this.xpSetup();
 
         },
         healthSetup: function (){
@@ -86,14 +83,14 @@ var game = {
             $computerHpDiv = $("<div>");
             $playerHpDiv.addClass('progress');
             $computerHpDiv.addClass('progress');
-            $playerHP = $('<div role="progressbar" aria-valuemin="0" style="width: 0%;">');
-            $computerHP = $('<div role="progressbar"  aria-valuemin="0" style="width: 0%;">');
-            $playerHP.css('width', this.playerHP + '%');
-            $computerHP.css('width', this.computerHP + '%');
-            $playerHpDiv = $("<div>");
-            $computerHpDiv = $("<div>");
+            $playerHp = $('<div role="progressbar" aria-valuemin="0" style="width: 0%;">');
+            $computerHp = $('<div role="progressbar"  aria-valuemin="0" style="width: 0%;">');
+            $playerHp.attr('width', this.playerHp + '%');
+            $computerHp.attr('width', this.computerHp + '%');
             $playerHpDiv.addClass('progress-bar bg-danger');
             $computerHpDiv.addClass('progress-bar bg-danger');
+            $('.playerHP').append($playerHpDiv.append($playerHp));
+          $('.computerHP').append($computerHpDiv.append($computerHp));
             
         },
         xpSetup: function (){
@@ -101,12 +98,14 @@ var game = {
             $computerXpDiv = $("<div>");
             $playerXpDiv.addClass('progress');
             $computerXpDiv.addClass('progress');
-            $playerXP = $('<div role="progressbar" aria-valuemin="0" style="width: 0%;">');
-            $computerXP = $('<div role="progressbar"  aria-valuemin="0" style="width: 0%;">');
-            $playerXP.css('width', this.playerXP + '%');
-            $computerXP.css('width', this.computerXP + '%');
+            $playerXp = $('<div role="progressbar" aria-valuemin="0" style="width: 0%;">');
+            $computerXp = $('<div role="progressbar"  aria-valuemin="0" style="width: 0%;">');
+            $playerXp.attr('width', this.playerAtk + '%');
+            $computerXp.attr('width', this.computerAtk + '%');
             $playerXpDiv.addClass('progress-bar bg-info');
             $computerXpDiv.addClass('progress-bar bg-info');
+            $('.playerXP').append($playerXpDiv.append($playerXp));
+           $('.computerXP').append($computerXpDiv.append($computerXp));
         },
 
         startGame: function () {
@@ -124,24 +123,24 @@ var game = {
 
                     //update players
                     update: function () {
-                        $computerHP.css('width', this.computerHP + '%');
-                        this.playerHP -= (this.computerAttack);
-                        $playerHP.html(this.playerHP + '%');
-                        $computerHP.html(this.computerHp + '%');
-                        $playerHP.css('width', this.playerHP + '%');
-                        $playerXP.html(this.playerXP + '%');
-                        $playerXP.css('width', this.playerXP + '%');
+                        $computerHp.attr('width', this.computerHp + '%');
+                        this.playerHp -= (this.computerAtk);
+                        $playerHp.html(this.playerHp + '%');
+                        $computerHp.html(this.computerHp + '%');
+                        $playerHp.attr('width', this.playerHp + '%');
+                        $playerXp.html(this.playerXP + '%');
+                        $playerXp.attr('width', this.playerAtk + '%');
 
                         this.checkForWinner();
                     },
 
                     //check for winner
                     checkForWinner: function () {
-                        if (this.computerrHp <= 0) {
+                        if (this.computerHP <= 0) {
                             //you win
                             alert('You Win!');
 
-                        } else if (this.playerHp <= 0) {
+                        } else if (this.playerHP <= 0) {
                             //you lose
                             alert('You Lose!');
                         }
