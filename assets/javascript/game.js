@@ -9,8 +9,8 @@ var $playerXP
 var $computerXP
 var $playerHpDiv;
 var $playerXpDiv;
-var $opponentHpDiv;
-var $opponentXpDiv;
+var $computerHpDiv;
+var $computerXpDiv;
 
 var game = {
         player: "",
@@ -62,7 +62,7 @@ var game = {
                         this.computerPlayer = opponent;
                     }
                 }
-                var opponent = $(".opponent");
+                var opponent = $(".defender");
                 opponent.appendTo(this.computerPlayer);
                 this.computerHP = this.character[this.computerPlayer].hp;
                 this, counterAtk = this.character[this.computerPlayer].counterAtk;
@@ -74,14 +74,12 @@ var game = {
         setUp: function () {
             this.healthSetup();
             this.xpSetup();
-           
     
-            $('.playerHP').append($playerHpDiv.append($playerHpDiv));
-            $('.playerXp').append($playerXpDiv.append($playerXpDiv));
-            $('.opponentHp').append($computerHpDiv.append($computerHpDiv));
-            $('.opponentXp').append($computerXpDiv.append($computerXpDiv));
+            $('.playerHP').append($playerHpDiv.append($playerHP));
+            $('.playerXP').append($playerXpDiv.append($playerXP));
+            $('.computerHP').append($computerHpDiv.append($computerHP));
+            $('.computerXP').append($computerXpDiv.append($computerXP));
 
-            
         },
         healthSetup: function (){
             $playerHpDiv = $("<div>");
