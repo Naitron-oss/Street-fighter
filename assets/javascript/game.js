@@ -51,60 +51,67 @@ var game = {
         selectPlayer: function (player) {
             if (this.player === "") {
                 this.player = player;
-                this.playerHp = this.character[this.player].hp;
-                this.playerAtk = this.character[this.player].atk;
-                var attacker = $("<.attacker>");
-                attacker.addClass(this.character[player]);
-                attacker.attr('style="width: 200%"');
-                atttacker.append(".attacker")
+                this.playerHp = this.characters[this.player].hp;
+                this.playerAtk = this.characters[this.player].atk;
+                var attacker = $("#attacker");
+                attacker.addClass(this.characters[player]);
+                attacker.append("<div class='this.player'>")
                 for (var defender in this.characters) {
                     if (defender !== this.player) {
                         this.computerPlayer = defender;
-                        console.log(defender);
+                        console.log("Defender: " + defender);
                     }
                 }
-                var opponent = $(".defender");
-                opponent.appendTo(this.computerPlayer);
-                this.computerHp = this.character[this.computerPlayer].hp;
-                this, counterAtk = this.character[this.computerPlayer].counterAtk;
-                console.log();
+                var opponent = $("#defender");
+                opponent.append(this.computerPlayer);
+                this.computerHp = this.characters[this.computerPlayer].hp;
+                this, counterAtk = this.characters[this.computerPlayer].counterAtk;
+                console.log(this.computerPlayer);
+                $("#opponent").html(this.computerPlayer);
+                $("#player").html(this.player);
             }
             this.startGame();
         },
 
         //set-up of game
         setUp: function () {
-            this.healthSetup();
-         //   this.xpSetup();
+            this.playerHpSetup();
+            this.ComputerHpSetup();
+            this.playerXpSetup();
+            this.computerXpSetup();
 
         },
-        healthSetup: function (){
+       playerHpSetup: function (){
             $playerHpDiv = $("<div>");
-            $computerHpDiv = $("<div>");
             $playerHpDiv.addClass('progress');
-            $computerHpDiv.addClass('progress');
             $playerHp = $('<div role="progressbar" aria-valuemin="0" style="width: 0%;">');
-            $computerHp = $('<div role="progressbar"  aria-valuemin="0" style="width: 0%;">');
-            $playerHp.attr('width', this.playerHp + '%');
-            $computerHp.attr('width', this.computerHp + '%');
-            $playerHpDiv.addClass('progress-bar bg-danger');
-            $computerHpDiv.addClass('progress-bar bg-danger');
+            $playerHp.attr('width', this.playerHp + '%');         
+            $playerHpDiv.addClass('progress-bar bg-danger');           
             $('.playerHP').append($playerHpDiv.append($playerHp));
-          $('.computerHP').append($computerHpDiv.append($computerHp));
-            
+     
         },
-        xpSetup: function (){
+        ComputerHpSetup: function(){
+            $computerHpDiv = $("<div>");
+            $computerHpDiv.addClass('progress');
+            $computerHp = $('<div role="progressbar"  aria-valuemin="0" style="width: 0%;">');
+            $computerHp.attr('width', this.computerHp + '%');
+            $computerHpDiv.addClass('progress-bar bg-danger');
+          $('.computerHP').append($computerHpDiv.append($computerHp));
+        },
+        playerXpSetup: function (){
             $playerXpDiv = $("<div>");
-            $computerXpDiv = $("<div>");
             $playerXpDiv.addClass('progress');
-            $computerXpDiv.addClass('progress');
             $playerXp = $('<div role="progressbar" aria-valuemin="0" style="width: 0%;">');
-            $computerXp = $('<div role="progressbar"  aria-valuemin="0" style="width: 0%;">');
             $playerXp.attr('width', this.playerAtk + '%');
-            $computerXp.attr('width', this.computerAtk + '%');
             $playerXpDiv.addClass('progress-bar bg-info');
-            $computerXpDiv.addClass('progress-bar bg-info');
             $('.playerXP').append($playerXpDiv.append($playerXp));
+        },
+        computerXpSetup: function(){
+            $computerXpDiv = $("<div>");
+            $computerXpDiv.addClass('progress');
+            $computerXp = $('<div role="progressbar"  aria-valuemin="0" style="width: 0%;">');
+            $computerXp.attr('width', this.computerAtk + '%');
+            $computerXpDiv.addClass('progress-bar bg-info');
            $('.computerXP').append($computerXpDiv.append($computerXp));
         },
 
@@ -116,9 +123,14 @@ var game = {
         },
         //attack function
         fight: function () {
-                        var randomAtkMultiplier = Math.floor(Math.random() * 4) + 1;
-                        $(".player").hide().html(this.player + " did an attack of " + this.playerAttack * randomAtkMultiplier);
-                        $(".opponent").hide().html(this.computerPlayer + " did a counter attack of " + this.computerAttack);
+                for(var i=0; i <$attackBtn; i++ ){
+                    if(this.computerHp !=0){
+                    powerUp = this.playerAtk ;
+                   this.playerAtk = this.playerAtk*2;
+                 
+                }
+            }
+        
                     },
 
                     //update players
@@ -127,20 +139,19 @@ var game = {
                         this.playerHp -= (this.computerAtk);
                         $playerHp.html(this.playerHp + '%');
                         $computerHp.html(this.computerHp + '%');
-                        $playerHp.attr('width', this.playerHp + '%');
-                        $playerXp.html(this.playerXP + '%');
+                        $playerXp.html(this.playerAtk + '%');
                         $playerXp.attr('width', this.playerAtk + '%');
 
                         this.checkForWinner();
                     },
-
+ 
                     //check for winner
                     checkForWinner: function () {
-                        if (this.computerHP <= 0) {
+                        if (this.computerHp <= 0) {
                             //you win
                             alert('You Win!');
 
-                        } else if (this.playerHP <= 0) {
+                        } else if (this.playerHp <= 0) {
                             //you lose
                             alert('You Lose!');
                         }
