@@ -110,7 +110,7 @@ var game = {
         $computerXpDiv = $("<div>");
         $computerXpDiv.addClass('progress');
         $computerXp = $('<div role="progressbar"  aria-valuemin="0" style="width: 0%;">');
-        $computerXp.attr('width', this.computerAtk + '%');
+        $computerXp.attr('width', this.counterAtk + '%');
         $computerXpDiv.addClass('progress-bar bg-info');
         $('.computerXP').append($computerXpDiv.append($computerXp));
     },
@@ -123,29 +123,26 @@ var game = {
     },
     //attack function
     fight: function () {
-
        
         this.playerAtk = this.playerAtk * 2;
-        powerUp = this.computerHp-this.playerAtk;
-        counterAttack = this.playerHp-this.counterAtk ;
+        this.computerHp = this.computerHp-this.playerAtk;
+        this.playerHp = this.playerHp-this.counterAtk ;
         
-
-            console.log("Computer Original Health: " + this.computerHp);
-            console.log("Computer New Health: " +powerUp)
-
-        console.log("Player Original Health: " + this.playerHp);
-        console.log("Player New Health; "+ counterAttack);
+        console.log("Computer Health: " + this.computerHp);
+        console.log("Player Health: " + this.playerHp);
 
     },
 
     //update players
     update: function () {
         $computerHp.attr('width', this.computerHp + '%');
-        $playerHp.html(this.playerHp + '%');
+        $playerHp.html(this.playerHp + 'HP');
         $playerHp.attr('width', this.playerrHp + '%');
-        $computerHp.html(this.computerHp + '%');
-        $playerXp.html(this.playerAtk + '%');
+        $computerHp.html(this.computerHp+ 'HP');
+        $playerXp.html(this.playerAtk + 'XP');
         $playerXp.attr('width', this.playerAtk + '%');
+        $computerXp.html(this.counterAtk + 'XP');
+        $computerXp.attr('width', this.counterAtk + '%');
 
         this.checkForWinner();
     },
