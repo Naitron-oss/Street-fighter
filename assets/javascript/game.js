@@ -126,18 +126,21 @@ var game = {
 
        
         this.playerAtk = this.playerAtk * 2;
-        powerUp = this.playerAtk-this.computerHp;
-        counterAttack = this.computerAtk-this.playerHp;
-            console.log(powerUp);
-            console.log(counterAttack);
+        powerUp = this.computerHp-this.playerAtk;
+        counterAttack = this.playerHp-this.counterAtk ;
+        
 
+            console.log("Computer Original Health: " + this.computerHp);
+            console.log("Computer New Health: " +powerUp)
+
+        console.log("Player Original Health: " + this.playerHp);
+        console.log("Player New Health; "+ counterAttack);
 
     },
 
     //update players
     update: function () {
         $computerHp.attr('width', this.computerHp + '%');
-        this.playerHp -= (this.computerAtk);
         $playerHp.html(this.playerHp + '%');
         $playerHp.attr('width', this.playerrHp + '%');
         $computerHp.html(this.computerHp + '%');
