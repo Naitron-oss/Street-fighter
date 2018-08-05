@@ -13,14 +13,11 @@
         crossorigin="anonymous">
     <!--stylesheet-->
     <link rel="stylesheet" href="assets/css/style.css">
-    <!--jQuery-->
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   
 </head>
 
 <body>
     <!--logo-->
-    <br>
     <div>
         <img src="assets/images/street-fighter-logo.png" class="logo" alt="Street Fighter Logo" />
     </div>
@@ -45,24 +42,24 @@
     <!--character choices-->
     <div class="container">
         <div class="row">
-            <div class="col-md-2" id="ken-image" data-name="ken">
+            <div class="col-md-2" id="ken-image" data-name="ken ">
                 <div>
-                    <img src="assets/images/ken.png" class="fighter1" alt="Street Fighter 1" />
+                    <img src="assets/images/ken.png" class="fighter1" alt="ken" />
                 </div>
             </div>
             <div class="col-md-2" id="sakura-image" data-name="sakura">
                 <div>
-                    <img src="assets/images/sakura.png" class="fighter2" alt="Street Fighter 4" />
+                    <img src="assets/images/sakura.png" class="fighter1" alt="sakura" />
                 </div>
             </div>
             <div class="col-md-2" id="chibi-image" data-name="chibi">
                 <div>
-                    <img src="assets/images/chibi.png" class="fighter3" alt="Street Fighter 4" />
+                    <img src="assets/images/chibi.png" class="fighter1" alt="chibi" />
                 </div>
             </div>
             <div class="col-md-2" id="ryu-image" data-name="ryu">
                 <div>
-                    <img src="assets/images/ryu.png" class="fighter4" alt="Street Fighter 4" />
+                    <img src="assets/images/ryu.png" class="fighter1" alt="ryu" />
                 </div>
             </div>
         </div>
@@ -71,8 +68,11 @@
     <div class="row">
         <div class="col-md">
             <div class="fighting-area">
+                <h3>Player Selected:</h3>
                 <div id="attacker"></div>
-                <div class="defender"></div>
+                <h3>Opponent Section!</h3>
+                <div id="defender"></div>
+               
 
             </div>
         </div>
@@ -85,6 +85,8 @@
         </div>
     </div>
       <!--javaScript-->
+        <!--jQuery-->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
       <script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
 

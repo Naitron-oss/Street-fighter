@@ -20,18 +20,6 @@ body{
     width: 200%;
     
 }
-.ken{
-background-image: url(../images/ken.png);
-}
-.ryu{
-    background-image: url(../images/ryu.png);
-}
-.sakura{
-    background-image: url(../images/sakura.png);
-}
-.chibi{
-    background-image: url(../images/chibi.png);
-}
 #opponent{
     color:white;
 margin-left: 75%;
@@ -39,4 +27,16 @@ margin-left: 75%;
 #player{
     color:white;
     margin-left: 10%;
+}
+.ken{
+   width: 25%;
+}
+.ryu{
+   width: 25%;
+}
+.sakura{
+    width: 25%;
+}
+.chibi{
+    width: 25%;
 }

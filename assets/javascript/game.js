@@ -25,25 +25,30 @@ var game = {
             name: "Ken",
             hp: 125,
             atk: 8,
-            counterAtk: 20
+            counterAtk: 20,
+            avatar: "assets/images/ken.png"
         },
         "sakura": {
             name: "Sakura",
             hp: 100,
             atk: 4,
-            counterAtk: 10
+            counterAtk: 10,
+            avatar: "assets/images/sakura.png"
         },
         "chibi": {
             name: "Chibi",
             hp: 115,
             atk: 6,
-            counterAtk: 15
+            counterAtk: 15,
+            avatar: "assets/images/chibi.png"
         },
         "ryu": {
             name: "Ryu",
             hp: 150,
             atk: 10,
-            counterAtk: 25
+            counterAtk: 25,
+            avatar: "assets/images/ryu.png"
+
         }
     },
 
@@ -53,24 +58,33 @@ var game = {
             this.player = player;
             this.playerHp = this.characters[this.player].hp;
             this.playerAtk = this.characters[this.player].atk;
-            var attacker = $("#attacker");
-            attacker.addClass(this.characters[player]);
-            attacker.append("<div class='this.player'>")
-            for (var defender in this.characters) {
-                if (defender !== this.player) {
-                    this.computerPlayer = defender;
-                    console.log("Defender: " + defender);
-                }
-            }
-            var opponent = $("#defender");
-            opponent.append(this.computerPlayer);
-            this.computerHp = this.characters[this.computerPlayer].hp;
-            this.counterAtk = this.characters[this.computerPlayer].counterAtk;
-            console.log(this.computerPlayer);
-            $("#opponent").html(this.computerPlayer);
-            $("#player").html(this.player);
+            var $attacker = $("<img>");
+            $attacker.attr("src", this.characters[this.player].avatar);
+            $attacker.addClass(player)
+            $("#attacker").append($attacker);
+
+            this.opponent();
         }
         this.startGame();
+    },
+    opponent: function () {
+        for (var defender in this.characters) {
+            if (defender !== this.player) {
+                this.computerPlayer = defender;
+                console.log("Defender: " + defender);
+
+                var $defender = $("<img>");
+                $defender.attr("src", this.characters[defender].avatar);
+                $defender.addClass(defender);
+                $("#defender").append($defender);
+            }
+        }
+
+        this.computerHp = this.characters[this.computerPlayer].hp;
+        this.counterAtk = this.characters[this.computerPlayer].counterAtk;
+        console.log(this.computerPlayer);
+        $("#opponent").html(this.computerPlayer);
+        $("#player").html(this.player);
     },
 
     //set-up of game
@@ -123,11 +137,11 @@ var game = {
     },
     //attack function
     fight: function () {
-       
+
         this.playerAtk = this.playerAtk * 2;
-        this.computerHp = this.computerHp-this.playerAtk;
-        this.playerHp = this.playerHp-this.counterAtk ;
-        
+        this.computerHp = this.computerHp - this.playerAtk;
+        this.playerHp = this.playerHp - this.counterAtk;
+
         console.log("Computer Health: " + this.computerHp);
         console.log("Player Health: " + this.playerHp);
 
@@ -137,8 +151,8 @@ var game = {
     update: function () {
         $computerHp.attr('width', this.computerHp + '%');
         $playerHp.html(this.playerHp + 'HP');
-        $playerHp.attr('width', this.playerrHp + '%');
-        $computerHp.html(this.computerHp+ 'HP');
+        $playerHp.attr('width', this.playerHp + '%');
+        $computerHp.html(this.computerHp + 'HP');
         $playerXp.html(this.playerAtk + 'XP');
         $playerXp.attr('width', this.playerAtk + '%');
         $computerXp.html(this.counterAtk + 'XP');
@@ -149,13 +163,16 @@ var game = {
 
     //check for winner
     checkForWinner: function () {
-        if (this.computerHp <= 0) {
+        if ((this.computerHp <= 0) && (defender == -1)) {
             //you win
             alert('You Win!');
+
+
 
         } else if (this.playerHp <= 0) {
             //you lose
             alert('You Lose!');
+
         }
     }
 
