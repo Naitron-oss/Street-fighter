@@ -2,7 +2,7 @@
 
 ### Overview
 
-I have created a HTML/CSS Word Guess Browser Game that uses JavaScript to compose the logic and jQuery for DOM manipulation.
+I have created a HTML/CSS RPG Street Fighter style Browser Game that uses JavaScript to compose the logic and jQuery for DOM manipulation.
 
 ### Before You Begin
 
