@@ -61,7 +61,7 @@ var game = {
             var $attacker = $("<img>");
             $attacker.attr("src", this.characters[this.player].avatar);
             $attacker.addClass(player)
-            $("#attacker").append($attacker);
+            $("#attacker").html($attacker);
 
             this.opponent();
         }
@@ -202,36 +202,35 @@ console.log(players[i]);
 $(document).ready(function () {
 gameSetUp();
   
-    $("#ken-image").on('click', function () {
+    $kenImage.on('click', function () {
         var data = $(this).data("name");
         game.selectPlayer(data);
         console.log(data);
-        players.empty();
+       
     });
 
     $ryuImage.on('click', function () {
         var data = $(this).data("name");
         game.selectPlayer(data);
         console.log(data);
-        players.empty();
+     
     });
 
     $sakuraImage.on('click', function () {
         var data = $(this).data("name");
         game.selectPlayer(data)
         console.log(data);
-        players.empty();
+        
     });
     $chibiImage.on('click', function () {
         var data = $(this).data("name");
         game.selectPlayer(data)
         console.log(data);
-        players.empty();
+       
     });
 
     $attackBtn.on('click', function () {
         game.fight();
         game.update();
-        console.log("Hi");
     });
 });

@@ -2,8 +2,8 @@ body{
     background-image: url(../images/street-fighter-background.jpg);
 }
 .logo{
-    margin-left: 38%;
-    width: 20%;
+    margin-left: 42%;
+    width: 15%;
 }
 .fighter1{
     width: 200%;
@@ -29,14 +29,17 @@ margin-left: 75%;
     margin-left: 10%;
 }
 .ken{
-   width: 25%;
+   width: 16%;
 }
 .ryu{
-   width: 25%;
+   width: 16%;
 }
 .sakura{
-    width: 25%;
+    width: 16%;
 }
 .chibi{
-    width: 25%;
+    width: 16%;
+}
+.character-section{
+    margin-left: 10%;
 }
