@@ -163,7 +163,7 @@ var game = {
 
     //check for winner
     checkForWinner: function () {
-        if ((this.computerHp <= 0) && (defender == -1)) {
+        if (this.computerHp <= 0) {
             //you win
             alert('You Win!');
 
@@ -176,35 +176,57 @@ var game = {
         }
     }
 
+};
+players = {
+    "ken":"assets/images/ken.png",
+    "sakura":"assets/images/sakura.png",
+    "chibi":"assets/images/chibi.png",
+    "ryu":"assets/images/ryu.png"
+};
+var gameSetUp = function(){
+
+for( var i=0; i<players.length; i++){
+var charactersDiv = $("<div>");
+var characterImg = $("<img>");
+characterImg.attr({'src': this.players, 'alt':this.player, 'data-name':this.player});
+characterImg.addClass("fighter1")
+charactersDiv.append(characterImg);
+$(".character-section").append(charactersDiv);
+
+console.log(players[i]);
 }
-
-
+};
 
 // playing the actual game
 
 $(document).ready(function () {
-
+gameSetUp();
+  
     $("#ken-image").on('click', function () {
         var data = $(this).data("name");
         game.selectPlayer(data);
         console.log(data);
+        players.empty();
     });
 
     $ryuImage.on('click', function () {
         var data = $(this).data("name");
         game.selectPlayer(data);
         console.log(data);
+        players.empty();
     });
 
     $sakuraImage.on('click', function () {
         var data = $(this).data("name");
         game.selectPlayer(data)
         console.log(data);
+        players.empty();
     });
     $chibiImage.on('click', function () {
         var data = $(this).data("name");
         game.selectPlayer(data)
         console.log(data);
+        players.empty();
     });
 
     $attackBtn.on('click', function () {
