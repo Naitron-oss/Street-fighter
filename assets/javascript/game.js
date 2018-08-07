@@ -19,6 +19,7 @@ var game = {
     computerHp: 0,
     playerAtk: 0,
     counterAtk: 0,
+    activeOpponents: [],
 
     characters: {
         "ken": {
@@ -64,6 +65,7 @@ var game = {
             $("#attacker").html($attacker);
 
             this.opponent();
+
         }
         this.startGame();
     },
@@ -77,6 +79,8 @@ var game = {
                 $defender.attr("src", this.characters[defender].avatar);
                 $defender.addClass(defender);
                 $("#defender").append($defender);
+                this.activeOpponents.push(this.characters[defender]);
+
             }
         }
 
@@ -105,12 +109,15 @@ var game = {
 
     },
     ComputerHpSetup: function () {
+        $('.computerHP').empty();
         $computerHpDiv = $("<div>");
         $computerHpDiv.addClass('progress');
         $computerHp = $('<div role="progressbar"  aria-valuemin="0" style="width: 0%;">');
         $computerHp.attr('width', this.computerHp + '%');
+        $computerHp.text(this.computerHp);
         $computerHpDiv.addClass('progress-bar bg-danger');
         $('.computerHP').append($computerHpDiv.append($computerHp));
+
     },
     playerXpSetup: function () {
         $playerXpDiv = $("<div>");
@@ -121,12 +128,15 @@ var game = {
         $('.playerXP').append($playerXpDiv.append($playerXp));
     },
     computerXpSetup: function () {
+        $('.computerXP').empty();
         $computerXpDiv = $("<div>");
         $computerXpDiv.addClass('progress');
         $computerXp = $('<div role="progressbar"  aria-valuemin="0" style="width: 0%;">');
         $computerXp.attr('width', this.counterAtk + '%');
-        $computerXpDiv.addClass('progress-bar bg-info');
-        $('.computerXP').append($computerXpDiv.append($computerXp));
+        $computerXp.text(this.computerHp);
+        $computerXpDiv.addClass('progress-bar bg-info'); 
+        $('.computerXP').html($computerXpDiv.append($computerXp));
+       
     },
 
     startGame: function () {
@@ -159,74 +169,72 @@ var game = {
         $computerXp.attr('width', this.counterAtk + '%');
 
         this.checkForWinner();
+
     },
 
     //check for winner
     checkForWinner: function () {
-        if (this.computerHp <= 0) {
+        if (this.computerHp <= 0)  {
             //you win
-            alert('You Win!');
+            alert('You beat ' + this.computerPlayer + " !");
 
-
+            this.decreaseOpponent();
 
         } else if (this.playerHp <= 0) {
             //you lose
             alert('You Lose!');
 
         }
+    },
+    decreaseOpponent: function(){
+           //check if there is still more opponents left
+           if (this.activeOpponents.length >= 2) {
+            var nextOpponent = this.activeOpponents.length - 2;
+            this.computerPlayer = this.activeOpponents[nextOpponent].name;
+            this.computerHp = this.activeOpponents[nextOpponent].hp;
+            this.computerXp = this.activeOpponents[nextOpponent].xp;
+            this.activeOpponents.pop();
+            console.log(this.activeOpponents);
+            $("#opponent").html(this.computerPlayer);
+            this.ComputerHpSetup();
+            this.computerXpSetup();
+            console.log(this.computerHp);
+    
     }
 
-};
-players = {
-    "ken":"assets/images/ken.png",
-    "sakura":"assets/images/sakura.png",
-    "chibi":"assets/images/chibi.png",
-    "ryu":"assets/images/ryu.png"
-};
-var gameSetUp = function(){
-
-for( var i=0; i<players.length; i++){
-var charactersDiv = $("<div>");
-var characterImg = $("<img>");
-characterImg.attr({'src': this.players, 'alt':this.player, 'data-name':this.player});
-characterImg.addClass("fighter1")
-charactersDiv.append(characterImg);
-$(".character-section").append(charactersDiv);
-
-console.log(players[i]);
-}
+} 
 };
 
 // playing the actual game
 
 $(document).ready(function () {
-gameSetUp();
-  
+
+
     $kenImage.on('click', function () {
         var data = $(this).data("name");
         game.selectPlayer(data);
         console.log(data);
-       
+
     });
 
     $ryuImage.on('click', function () {
         var data = $(this).data("name");
         game.selectPlayer(data);
         console.log(data);
-     
+
     });
 
     $sakuraImage.on('click', function () {
         var data = $(this).data("name");
         game.selectPlayer(data)
         console.log(data);
-        
+
     });
     $chibiImage.on('click', function () {
         var data = $(this).data("name");
         game.selectPlayer(data)
         console.log(data);
-       
+
     });
 
     $attackBtn.on('click', function () {
